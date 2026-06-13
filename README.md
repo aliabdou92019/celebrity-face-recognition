@@ -1,6 +1,25 @@
-# Celebrity Face Recognition
+<!-- Header Badges -->
 
+
+---
+
+<h1 align="center">Celebrity Face Recognition</h1>
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.7%2B-blue?style=flat-square&logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-Latest-orange?style=flat-square&logo=tensorflow&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-Latest-red?style=flat-square&logo=pytorch&logoColor=white)
+![Deep Learning](https://img.shields.io/badge/Deep%20Learning-CNN--Transformer-purple?style=flat-square)
+![MTCNN](https://img.shields.io/badge/Face%20Detection-MTCNN-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Academic](https://img.shields.io/badge/Academic-HNU-yellow?style=flat-square)
+
+</div>
 A comprehensive deep learning project for celebrity face recognition and classification using multiple state-of-the-art models including **ArcFace**, **FaceNet**, and **Vision Transformers (ViT)**.
+
+**Project Objective:** Deploy a Deep Learning model using CNNs and Transfer Learning to recognize celebrity identities from facial images.
+
+> 🎓 **Part of the AI-Skill Program** at **Helwan National University (HNU)**
 
 ## 📋 Project Overview
 
@@ -53,7 +72,48 @@ celebrity-face-recognition/
 
 ---
 
-## 🔧 Models Implemented
+## 🔧 Model Development
+
+### Used Pretrained Models
+
+- **FaceNet** — Pretrained CNN trained on large-scale face datasets
+- **ViT** — Vision Transformer pretrained on ImageNet-21K
+- **ArcFace** — Pretrained CNN trained on large-scale face datasets with additive angular margin
+
+### Training Dataset
+
+- **Source:** Top 1000 celebrities with different angles and positions
+- **Size:** 18,184 images
+- **Resolution:** 256×256 pixels
+- **Link:** [Celebrity-1000 on Hugging Face](https://huggingface.co/datasets/tonyassi/celebrity-1000/)
+
+### Data Preprocessing
+
+- Resized each image to fit model requirements (e.g., 160×160×3 for FaceNet)
+- Split data into Train, Test, and Evaluation sets
+- Applied augmentation: rotation, flipping, geometric transformations
+
+### Embedding Extraction
+
+- Extracted high-dimensional **Face Embeddings** from pretrained models
+- Saved embeddings in optimized formats (.csv, .npy) for faster access
+- Normalized embeddings for similarity matching
+
+### Classifier Design
+
+- Input layer matching embedding dimensions
+- Hidden fully connected layers for feature transformation
+- Output layer with softmax activation for multi-class classification
+
+### Classifier Training
+
+- Trained classifiers on embeddings from training set
+- Used celebrity names as target labels
+- Optimized over multiple epochs with validation monitoring
+
+---
+
+## 🔧 Models Explained
 
 ### 1. **ArcFace (Additive Angular Margin)**
 - **Purpose:** State-of-the-art face recognition model using angular-based loss
@@ -91,7 +151,65 @@ celebrity-face-recognition/
 
 ---
 
-## 📦 Dataset
+## � Model Evaluation & Performance
+
+We evaluated each model's performance and compared results across all implemented architectures.
+
+### Performance Metrics
+
+| Model | Accuracy | Precision | Recall |
+|:-----:|:--------:|:---------:|:------:|
+| **FaceNet** | 97% | 95% | 97% |
+| **ArcFace** | 96% | 95% | 95% |
+| **ViT** | 81% | 79% | 79% |
+
+### Evaluation Results
+
+- **Best Overall:** FaceNet with 97% accuracy
+- **Most Stable:** ArcFace with balanced precision-recall
+- **Modern Approach:** ViT with attention-based interpretability
+
+### Confusion Matrix Analysis
+
+<div align="center">
+  <img src="Images/confusion-matrix.jpg" alt="Confusion Matrix" width="70%">
+</div>
+
+---
+
+## 🔍 Explainability & Interpretability
+
+### GRAD-CAM Visualization
+We used **Grad-CAM** to interpret and understand model predictions by highlighting critical regions in facial images.
+
+<div align="center">
+  <img src="Images/grad-cam.jpg" alt="GRAD-CAM Heatmap" width="70%">
+</div>
+
+### Attention Rollout (ViT)
+For Vision Transformers, we visualize attention patterns to understand how the model focuses on different facial regions.
+
+---
+
+## 🖥️ User Interface & Applications
+
+### Gradio GUI
+We developed a functional GUI using **Gradio** to apply the FaceNet model for celebrity classification.
+
+<div align="center">
+  <img src="Images/gui.jpg" alt="Gradio GUI" width="70%">
+</div>
+
+### Real-time Webcam Detection
+Live classification support for real-time celebrity identification from webcam feeds.
+
+<div align="center">
+  <img src="Images/webcam.jpg" alt="Webcam Detection" width="70%">
+</div>
+
+---
+
+## �📦 Dataset
 
 The project uses the **Celebrity-1000** dataset from Hugging Face:
 - **Dataset:** `tonyassi/celebrity-1000`
@@ -310,7 +428,9 @@ Results & Interpretation
 
 ## 📄 License
 
-This project is provided as-is for educational and research purposes. Ensure you have proper rights to use the celebrity dataset and comply with dataset licensing terms.
+This project is open source and available under the [MIT License](https://mit-license.org/).
+
+**Terms:** Feel free to use this project for educational, research, and commercial purposes with proper attribution.
 
 ---
 
